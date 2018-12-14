@@ -1,10 +1,17 @@
 version: 2
+
+
 jobs:
   build:
     docker: # use the docker executor type; machine and macos executors are also supported
-      - image: circleci/node:4.8.2 # the primary container, where your job's commands are run
-
+      - image: cctest # the primary container, where your job's commands are run
+        auth:
+          username: admin
+          password: Tb0Gx1Sp1Wd6Xn
+    working_directory: ~/hogehoge
     steps:
       - checkout
-      - run: pwd 
-      - run: ls 
+      - run: cp /home/tools/cobolconv/build.gradle .
+      - run: gradle COBOLconvert
+      - run: gradle upload
+
