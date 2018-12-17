@@ -10,12 +10,12 @@ jobs:
         password: Tb0Gx1Sp1Wd6Xn
     working_directory: ~/hogehoge
     environment:
-      TAEGET_DIR: /tmp/converted
+      TAEGET_DIR: _converted
     steps:
       - checkout
       - run: cp /home/tools/cobolconv/build.gradle .
       - run:
-          command: |
+          command: |        
             echo 'export archivePath=$TAEGET_DIR/$(git show -s --format=%H).tar.gz' >> $BASH_ENV
             source $BASH_ENV
       - run: gradle COBOLconvert
