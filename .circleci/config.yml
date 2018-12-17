@@ -4,14 +4,30 @@ version: 2
 jobs:
   build:
     docker: # use the docker executor type; machine and macos executors are also supported
-      - image:  shuhein-docker-local.jfrog.io/cobolcnvert:0.1 # the primary container, where your job's commands are run
+#      - image:  shuhein-docker-local.jfrog.io/cobolcnvert:0.1 # the primary container, where your job's commands are run
+      - image: cctest
         auth:
           username: admin
           password: Tb0Gx1Sp1Wd6Xn
     working_directory: ~/hogehoge
+    environment:
+      TAEGET_DIR: /tmp/converted
     steps:
       - checkout
       - run: cp /home/tools/cobolconv/build.gradle .
+      - run:
+          command: |
+            echo 'export archivePath=$TAEGET_DIR/$(git show -s --format=%H).tar.gz' >> $BASH_ENV
+            source $BASH_ENV
       - run: gradle COBOLconvert
+      - run: 
+          command: |
+            mkdir -p $TAEGET_DIR
+            tar czf $archivePath convertedCodes
+      - store_artifacts:
+          path: $TAEGET_DIR
+          destination: converted
       - run: gradle upload
+
+
 
