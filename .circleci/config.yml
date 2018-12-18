@@ -21,6 +21,7 @@ jobs:
           command: |
             mkdir -p /tmp/result
             tar czf /tmp/result/$archiveFile convertedCodes
+            ls /tmp/result
       - store_artifacts:  #$refができない・・・ので直書き
           path: /tmp/conv
           destination: converted
