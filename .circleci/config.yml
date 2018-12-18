@@ -16,7 +16,6 @@ jobs:
           command: |
             echo 'export archiveFile=$(git show -s --format=%H).tar.gz' >> $BASH_ENV
             source $BASH_ENV
-            touch /tmp/result/$archiveFile
       - run: gradle COBOLconvert
       - run: 
           command: |
@@ -25,7 +24,7 @@ jobs:
       - store_artifacts:  #$refができない・・・ので直書き
           path: /tmp/conv
           destination: converted
-      # - run: gradle upload
+      - run: gradle upload
 
 
 
