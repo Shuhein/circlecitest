@@ -9,24 +9,20 @@ jobs:
         username: admin
         password: Tb0Gx1Sp1Wd6Xn
     working_directory: ~/hogehoge
-    environment:
-      TAEGET_DIR: _converted
     steps:
       - checkout
       - run: cp /home/tools/cobolconv/build.gradle .
       - run:
           command: |
-            mkdir  -p /tmp/conv       
             echo 'export archiveFile=$(git show -s --format=%H).tar.gz' >> $BASH_ENV
             source $BASH_ENV
-            touch /tmp/conv/$archiveFile
-            ls $TAEGET_DIR
-      # - run: gradle COBOLconvert
-      # - run: 
-      #     command: |
-      #       mkdir -p $TAEGET_DIR
-      #       tar czf $TAEGET_DIR/$archiveFile convertedCodes
-      - store_artifacts:
+            touch /tmp/result/$archiveFile
+      - run: gradle COBOLconvert
+      - run: 
+          command: |
+            mkdir -p /tmp/result
+            tar czf /tmp/result/$archiveFile convertedCodes
+      - store_artifacts:  #$refができない・・・ので直書き
           path: /tmp/conv
           destination: converted
       # - run: gradle upload
