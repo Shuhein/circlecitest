@@ -21,7 +21,7 @@ jobs:
             source $BASH_ENV
             echo $archivePath
             # touch $archivePath
-            ls 
+            ls $TAEGET_DIR
       # - run: gradle COBOLconvert
       # - run: 
       #     command: |
