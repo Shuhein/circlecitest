@@ -16,18 +16,18 @@ jobs:
       - run: cp /home/tools/cobolconv/build.gradle .
       - run:
           command: |
-            mkdir  -p $TAEGET_DIR       
+            mkdir  -p /tmp/conv       
             echo 'export archiveFile=$(git show -s --format=%H).tar.gz' >> $BASH_ENV
             source $BASH_ENV
-            touch $TAEGET_DIR/$archiveFile
+            touch /tmp/conv/$archiveFile
             ls $TAEGET_DIR
       # - run: gradle COBOLconvert
       # - run: 
       #     command: |
       #       mkdir -p $TAEGET_DIR
-      #       tar czf $archivePath convertedCodes
+      #       tar czf $TAEGET_DIR/$archiveFile convertedCodes
       - store_artifacts:
-          path: $TAEGET_DIR
+          path: /tmp/conv
           destination: converted
       # - run: gradle upload
 
