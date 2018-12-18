@@ -15,11 +15,12 @@ jobs:
       - checkout
       - run: cp /home/tools/cobolconv/build.gradle .
       - run:
-          command: |        
+          command: |
+            mkdir  -p $TAEGET_DIR       
             echo 'export archivePath=$TAEGET_DIR/$(git show -s --format=%H).tar.gz' >> $BASH_ENV
             source $BASH_ENV
             echo $archivePath
-            touch $archivePath
+            # touch $archivePath
             ls 
       # - run: gradle COBOLconvert
       # - run: 
