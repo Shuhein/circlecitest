@@ -17,10 +17,9 @@ jobs:
       - run:
           command: |
             mkdir  -p $TAEGET_DIR       
-            echo 'export archivePath=$TAEGET_DIR/$(git show -s --format=%H).tar.gz' >> $BASH_ENV
+            echo 'export archiveFile=$(git show -s --format=%H).tar.gz' >> $BASH_ENV
             source $BASH_ENV
-            echo $archivePath
-            # touch $archivePath
+            touch $TAEGET_DIR/$archiveFile
             ls $TAEGET_DIR
       # - run: gradle COBOLconvert
       # - run: 
