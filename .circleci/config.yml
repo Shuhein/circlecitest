@@ -19,15 +19,17 @@ jobs:
             echo 'export archivePath=$TAEGET_DIR/$(git show -s --format=%H).tar.gz' >> $BASH_ENV
             source $BASH_ENV
             echo $archivePath
-      - run: gradle COBOLconvert
-      - run: 
-          command: |
-            mkdir -p $TAEGET_DIR
-            tar czf $archivePath convertedCodes
+            touch $archivePath
+            ls 
+      # - run: gradle COBOLconvert
+      # - run: 
+      #     command: |
+      #       mkdir -p $TAEGET_DIR
+      #       tar czf $archivePath convertedCodes
       - store_artifacts:
           path: $TAEGET_DIR
           destination: converted
-      - run: gradle upload
+      # - run: gradle upload
 
 
 
