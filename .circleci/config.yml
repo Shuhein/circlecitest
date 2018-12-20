@@ -25,8 +25,7 @@ jobs:
       - store_artifacts:  #$refができない・・・ので直書き
           path: /tmp/result
           destination: converted
-      - run: gradle upload
+      # - run: gradle upload
 
-      
-
+    
 
